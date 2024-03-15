@@ -8,6 +8,7 @@ function App() {
   const [placeHolder, setPlaceHolder] = useState("Enter your todo")
   // const [addTodo, setAddTodo] = useState()
   let [store, setStore] = useState([])
+  const [doneTasks, setDoneTasks] = useState(false)
   
   // const [edit,setEdit]=useState(true)
   const onInputchange = (e) => setInputTodo(e.target.value)
@@ -62,6 +63,9 @@ function App() {
   const saveToLS = (params) => {
     localStorage.setItem("store", JSON.stringify(store))
   }
+  const handelDoneTask=(e)=>{
+    setDoneTasks(!e)
+  }
   
   // const setAddTodo=(e,id)=>{
 
@@ -84,14 +88,14 @@ function App() {
           <input
             type="text"
             placeholder={placeHolder}
-            className='outline outline-blue-300 rounded-xl p-1 text-2xl w-[40vw]'
+            className='outline outline-blue-300 rounded-xl p-1 sm:text-2xl w-[40vw]'
             value={inputTodo}
             autoFocus
             onChange={(e) => onInputchange(e)}
           />
 
           <button
-            className='mt-6  bg-red-600 px-3 w-20 rounded-lg h-[70px] shadow-slate-700 shadow-sm text-white text-xl font-bold active:shadow-none active:bg-red-700 hover:text-[22px] transition-all delay-10' onClick={(e) => { onsubmit() }}>Save
+            className='mt-6  bg-red-600 px-3 sm:w-20 rounded-lg sm:h-[70px] shadow-slate-700 shadow-sm text-white sm:text-xl font-bold active:shadow-none active:bg-red-700 hover:sm:text-[22px] hover:text-[17px] transition-all delay-10' onClick={(e) => { onsubmit() }}>Save
           </button>
           <div
             className=' w-full h-full'>
@@ -99,10 +103,12 @@ function App() {
               className=' mx-8 my-1'>
               <input
                 className=''
+                value={doneTasks}
+                onChange={e=>handelDoneTask(e.target.value)}
                 type="checkbox"
                 id="done" />
               <label
-                className=' ml-4 font-bold text-xl text-slate-900'
+                className=' sm:ml-4 ml-1 font-medium sm:font-bold sm:text-xl text-slate-900'
                 htmlFor="done">Done
                 <span
 
@@ -115,25 +121,39 @@ function App() {
 
             </div>
             <div >
-              {store.map(e => {
-                return (<ToDo
-                  key={e.id}
-                  name={e.id}
-                  complete={e.complete}
-                  edit={e.edit}
-                  onComplete={e => onComplete(e)}
-                  addTodo={e.inputTodo}
-                  onEdit={(e) => onEdit(e)}
-                  onDelete={(e, id) => onDelete(e, id)}
-                  setAddTodo={(e, id) => setAddTodo(e, id)}
-                />)
-              })}
+            {store.map(e=>{
+            
+            return (
+              e.complete?
+              (<ToDo
+              key={e.id}
+              name={e.id}
+              complete={e.complete}
+              edit={e.edit}
+              onComplete={e => onComplete(e)}
+              addTodo={e.inputTodo}
+              onEdit={(e) => onEdit(e)}
+              onDelete={(e, id) => onDelete(e, id)}
+              setAddTodo={(e, id) => setAddTodo(e, id)}
+              />)
+              :
+              (<ToDo
+              key={e.id}
+              name={e.id}
+              complete={e.complete}
+              edit={e.edit}
+              onComplete={e => onComplete(e)}
+              addTodo={e.inputTodo}
+              onEdit={(e) => onEdit(e)}
+              onDelete={(e, id) => onDelete(e, id)}
+              setAddTodo={(e, id) => setAddTodo(e, id)}
+              />))})}
+
             </div>
           </div>
         </div>
       </div>
     </>
-  )
-}
+  )}
 
 export default App

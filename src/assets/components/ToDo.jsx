@@ -5,7 +5,6 @@ import { FaSave } from "react-icons/fa";
 
 function ToDo({
   addTodo ,
-  setAddTodo,
   complete,
 onComplete,
 name,
@@ -42,23 +41,23 @@ onEdit
          <input 
           autoFocus={true}
           type=" text"
-          className={complete?' bg-green-500':''} 
+          className={complete?'sm:w-[30vw] md:w-[49vw] w-[20vw] px-2 rounded-lg h-9 text-xl  bg-green-500':'sm:w-[30vw] md:w-[49vw] w-[20vw] px-2 rounded-lg h-9 text-xl '} 
           value={editTodo}
           onChange={(e)=>{onEditInputChange(e.target.value)}}
-          />:<div className={complete?' bg-green-500':''}>{editTodo}</div>}
+          />:<div className={complete?'sm:w-[30vw] md:w-[49vw] w-[20vw] px-2 rounded-lg h-9 text-xl bg-green-500 ':'sm:w-[30vw] md:w-[45vw] w-[20vw] px-2 rounded-lg h-9 text-xl'}>{editTodo}</div>}
       
        </div>
       </div>
 
       <button
-        className='bg-blue-900 text-white  h-10 text-2xl w-13 px-3 rounded-md shadow-slate-700 shadow-sm active:shadow-none active:bg-blue-800 hover:text-[26px] transition-all delay-10'
+        className='mx-2 bg-blue-900 text-white  sm:h-10 h-8  w-9 text-lg sm:text-2xl sm:w-12 sm:px-3 px-2 rounded-md shadow-slate-700 shadow-sm active:shadow-none active:bg-blue-800 hover:sm:text-[26px] hover:text-[19px] transition-all delay-10'
         name={name}
         onClick={e=>onEdit(name,editTodo)} >
           {edit?<FaSave />:<MdEdit />}
         
       </button>
       <button
-        className='bg-blue-900 text-white h-10 text-2xl w-13 px-3 rounded-md shadow-slate-700 shadow-sm active:shadow-none active:bg-blue-800 hover:text-[26px] transition-all delay-10 lg: '>
+        className='mx-2 bg-blue-900 text-white sm:h-10 h-8 w-9 text-lg sm:text-2xl sm:w-[50px] sm:px-3 px-2 rounded-md shadow-slate-700 shadow-sm active:shadow-none active:bg-blue-800 hover:sm:text-[26px] hover:text-[19px] transition-all delay-10 lg: '>
         <RiDeleteBin6Fill onClick={e=>onDelete(e ,name)} />
       </button>
     </div>
